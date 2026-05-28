@@ -68,9 +68,10 @@ DiabetesPedigreeFunction, Age
 ## 🔧 What I Did
 
 ### 1. Data Cleaning
-<!-- FILL IN: Describe what issues you found — impossible zeros, missing values, outliers -->
-<!-- Example: "Found 227 rows where Glucose was 0 — replaced with column median" -->
-- [ ] Add your findings here after Day 2
+- Found invalid zeros in 5 columns (Glucose, BloodPressure, SkinThickness, Insulin, BMI)
+- Insulin had the most — 374 zeros (48.7% of the dataset)
+- Replaced all invalid zeros with column medians
+- Saved cleaned dataset to data/diabetes_cleaned.csv
 
 ### 2. Exploratory Data Analysis
 <!-- FILL IN: What questions did you ask? What did you find? -->
