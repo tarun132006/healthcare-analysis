@@ -1,0 +1,15 @@
+healthcare-analysis/
+│
+├── data/
+│   └── diabetes.csv
+│
+├── notebooks/
+│   ├── 01_data_cleaning.ipynb
+│   ├── 02_eda.ipynb
+│   ├── 03_statistical_analysis.ipynb
+│   └── 04_visualizations.ipynb
+│
+├── outputs/
+│   └── charts/        ← your saved plots
+│
+└── README.md          ← explains everything clearly
