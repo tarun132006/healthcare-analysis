@@ -2,9 +2,9 @@
 ### Exploratory Data Analysis on the Pima Indians Diabetes Dataset
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
-![NumPy](https://img.shields.io/badge/NumPy-1.x-orange)
-![Pandas](https://img.shields.io/badge/Pandas-2.x-green)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-3.x-red)
+![NumPy](https://img.shields.io/badge/NumPy-2.4.6-orange)
+![Pandas](https://img.shields.io/badge/Pandas-3.0.3-green)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-3.10.9-red)
 ![Dataset](https://img.shields.io/badge/Dataset-NIDDK-lightgrey)
 
 ---
@@ -27,25 +27,32 @@ cleaning, exploration, and statistical analysis, and communicate findings throug
 
 ---
 
+## 📈 Dashboard
+
+![Dashboard](outputs/charts/05_dashboard.png)
+
+---
+
 ## 📂 Project Structure
 
 ```
-diabetes-analysis/
+healthcare-analysis/
 │
 ├── data/
-│   └── diabetes.csv              # Raw dataset (never modified)
+│   ├── diabetes.csv                    # Raw dataset (never modified)
+│   └── diabetes_cleaned.csv           # Cleaned dataset
 │
 ├── notebooks/
-│   ├── 01_data_cleaning.ipynb    # Load, inspect, fix data quality issues
-│   ├── 02_eda.ipynb              # Exploratory analysis & questions
+│   ├── 01_data_cleaning.ipynb         # Load, inspect, fix data quality issues
+│   ├── 02_eda.ipynb                   # Exploratory analysis & questions
 │   ├── 03_statistical_analysis.ipynb  # Correlations & comparisons
-│   └── 04_visualizations.ipynb  # Final publication-quality charts
+│   └── 04_visualizations.ipynb       # Final publication-quality charts
 │
 ├── outputs/
-│   └── charts/                   # Saved PNG plot files
+│   └── charts/                        # Saved PNG plot files
 │
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
+├── requirements.txt                   # Python dependencies
+└── README.md                          # This file
 ```
 
 ---
@@ -70,46 +77,56 @@ DiabetesPedigreeFunction, Age
 ### 1. Data Cleaning
 - Found invalid zeros in 5 columns (Glucose, BloodPressure, SkinThickness, Insulin, BMI)
 - Insulin had the most — 374 zeros (48.7% of the dataset)
-- Replaced all invalid zeros with column medians
-- Saved cleaned dataset to data/diabetes_cleaned.csv
+- BloodPressure had 35 zeros (4.6%) — medically impossible values
+- Replaced all invalid zeros with column medians to preserve data integrity
+- Saved cleaned dataset to `data/diabetes_cleaned.csv`
 
 ### 2. Exploratory Data Analysis
-<!-- FILL IN: What questions did you ask? What did you find? -->
-<!-- Example: "Diabetic patients had an average glucose of X vs Y in healthy patients" -->
-- [ ] Add your findings here after Day 3 & 4
+- Dataset is imbalanced — 500 healthy patients (65.1%) vs 268 diabetic patients (34.9%)
+- Diabetic patients had a significantly higher average glucose (142.13) vs healthy patients (110.68)
+- Diabetic patients tend to be older — average age 37.07 vs 31.19 for healthy patients
+- Diabetic patients have higher average BMI (35.38) vs healthy patients (30.88)
+- Scatter plots showed diabetic patients clustering in the high glucose + older age region
 
 ### 3. Statistical Analysis
-<!-- FILL IN: What correlations did you find? Which features mattered most? -->
-<!-- Example: "Glucose had the strongest correlation with Outcome (r = 0.47)" -->
-- [ ] Add your findings here after Day 5
+- Glucose had the strongest correlation with diabetes outcome (r = 0.49)
+- BMI was the second strongest predictor (r = 0.31)
+- Age was third (r = 0.24)
+- Insulin results are less reliable due to 48.7% of values being replaced during cleaning
+- Box plots confirmed Glucose shows the clearest separation between diabetic and healthy groups
 
 ### 4. Key Visualisations
-<!-- FILL IN: List your best charts and what they show -->
-<!-- Example: "Correlation heatmap showing top predictors of diabetes" -->
-- [ ] Add your charts here after Day 6
+- Outcome distribution bar chart with percentage labels
+- Overlapping histograms for Glucose, BMI and Age by outcome
+- Correlation heatmap showing relationships between all features
+- Feature importance horizontal bar chart ranked by correlation strength
+- Full dashboard combining all 4 key charts into one figure
 
 ---
 
 ## 💡 Key Findings
 
-<!-- FILL IN THIS SECTION LAST — after your full analysis on Day 7 -->
-<!-- This is the most important part of the README for recruiters -->
-<!-- Write 3-5 bullet points of the most interesting things you discovered -->
-
-- 🔍 Finding 1: ...
-- 🔍 Finding 2: ...
-- 🔍 Finding 3: ...
-- 🔍 Finding 4: ...
-- 🔍 Finding 5: ...
+- 🔍 **Glucose is the strongest predictor** — diabetic patients had 31 points higher average glucose than healthy patients (142 vs 111)
+- 🔍 **Almost half of Insulin values were missing** — 374 out of 768 records had impossible zero values, making it the dirtiest column in the dataset
+- 🔍 **Age + high glucose is a dangerous combination** — scatter plots show older patients with high glucose are almost exclusively diabetic
+- 🔍 **The dataset is imbalanced** — only 1 in 3 patients is diabetic, which must be considered in any further modelling
+- 🔍 **BMI and Glucose together** show the clearest clustering of diabetic patients in the high-risk zone
 
 ---
 
-## 📈 Sample Visualisations
+## 📊 Sample Visualisations
 
-<!-- FILL IN: Add your best chart images here after Day 6 -->
-<!-- To add an image: ![Chart Title](outputs/charts/your_chart.png) -->
+### Outcome Distribution
+![Outcome Distribution](outputs/charts/01_outcome_distribution.png)
 
-*Coming soon — charts will be added after analysis is complete.*
+### Feature Distributions by Outcome
+![Distributions](outputs/charts/02_distributions.png)
+
+### Correlation Heatmap
+![Heatmap](outputs/charts/03_heatmap.png)
+
+### Feature Importance
+![Feature Importance](outputs/charts/04_feature_importance.png)
 
 ---
 
@@ -117,8 +134,8 @@ DiabetesPedigreeFunction, Age
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/diabetes-analysis.git
-cd diabetes-analysis
+git clone https://github.com/tarun132006/healthcare-analysis.git
+cd healthcare-analysis
 ```
 
 2. **Install dependencies**
@@ -141,20 +158,20 @@ pip install -r requirements.txt
 ## 🛠️ Requirements
 
 ```
-numpy
-pandas
-matplotlib
-seaborn
+numpy==2.4.6
+pandas==3.0.3
+matplotlib==3.10.9
+seaborn==0.13.2
 jupyter
+ipykernel
 ```
 
 ---
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [@your_username](https://github.com/your_username)
-- LinkedIn: [your_linkedin](https://linkedin.com/in/your_linkedin)
+**Tarun**
+- GitHub: [@tarun132006](https://github.com/tarun132006)
 
 ---
 
